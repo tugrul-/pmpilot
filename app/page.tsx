@@ -19,7 +19,7 @@ export default function Home() {
       <section className="hero">
         <div className="hero-text">
           <p className="eyebrow">Project management, simplified</p>
-          <h1>Keep your projects visible, aligned, and under control</h1>
+          <h1>Keep your projects visible, aligned, and under control.</h1>
           <p className="hero-description">
             PMPilot gives project teams a clear and practical workspace to
             plan, monitor, and manage delivery with confidence.
