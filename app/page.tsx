@@ -163,15 +163,28 @@ export default function Home() {
         </a>
       </section>
 
-      <footer className="footer">
-        <div className="footer-brand">© 2026 PMPilot. All rights reserved.</div>
-        <div className="footer-links">
-          <a href="#features">Features</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#login">Login</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </footer>
+<footer className="footer">
+  <div className="footer-top">
+    <div className="footer-brand">© 2026 PMPilot. All rights reserved.</div>
+
+    <div className="footer-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="mailto:hello@pmpilot.org">Contact</a>
+      <a href="/privacy-policy">Privacy Policy</a>
+      <a href="/terms-of-service">Terms of Service</a>
+    </div>
+  </div>
+
+  <div className="footer-company">
+    PMPilot is developed and operated by Twino Digital.
+  </div>
+
+  <div className="footer-contact">
+    Contact:{" "}
+    <a href="mailto:hello@pmpilot.org">hello@pmpilot.org</a>
+  </div>
+</footer>
     </main>
   );
 }

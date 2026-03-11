@@ -304,20 +304,41 @@ a {
 }
 
 .footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
   padding: 28px 0 10px;
   border-top: 1px solid #e5e7eb;
   color: #6b7280;
   font-size: 14px;
 }
 
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
 .footer-links {
   display: flex;
   gap: 18px;
   flex-wrap: wrap;
+}
+
+.footer-company {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.footer-contact {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.footer-contact a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 @media (max-width: 960px) {
