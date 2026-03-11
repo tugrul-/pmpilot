@@ -201,8 +201,10 @@ a {
 
 .section-heading {
   max-width: 720px;
-  margin-bottom: 32px;
+  margin: 0 auto 32px auto;
+  text-align: center;
 }
+
 
 .section-heading h2 {
   margin: 0;
@@ -211,10 +213,11 @@ a {
 }
 
 .section-description {
-  margin-top: 14px;
+  margin: 14px auto 0 auto;
   color: #6b7280;
   font-size: 17px;
   line-height: 1.7;
+  max-width: 600px;
 }
 
 .cards {
