@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
@@ -13,7 +14,8 @@ export default function LoginPage() {
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const handleLogin = async () => {
+  const handleLogin = async (event: React.FormEvent) => {
+    event.preventDefault()
     setLoading(true)
     setMessage('')
 
@@ -33,34 +35,66 @@ export default function LoginPage() {
   }
 
   return (
-    <div style={{ padding: 40 }}>
-      <h1>Login</h1>
+    <main className="page auth-page">
+      <header className="header auth-header">
+        <div className="logo">PMPilot</div>
+      </header>
 
-      <input
-        type="email"
-        placeholder="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+      <section className="auth-section">
+        <div className="auth-card">
+          <p className="eyebrow">Welcome back</p>
+          <h1 className="auth-title">Sign in to your workspace</h1>
+          <p className="auth-subtitle">
+            Enter your email and password to access your projects and keep work
+            on track.
+          </p>
 
-      <br />
-      <br />
+          <form className="auth-form" onSubmit={handleLogin}>
+            <label className="auth-label">
+              <span>Email</span>
+              <input
+                className="auth-input"
+                type="email"
+                autoComplete="email"
+                placeholder="you@company.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </label>
 
-      <input
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+            <label className="auth-label">
+              <span>Password</span>
+              <input
+                className="auth-input"
+                type="password"
+                autoComplete="current-password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </label>
 
-      <br />
-      <br />
+            {message && <p className="auth-message">{message}</p>}
 
-      <button onClick={handleLogin} disabled={loading}>
-        {loading ? 'Logging in...' : 'Login'}
-      </button>
+            <button
+              className="btn btn-primary auth-submit"
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? 'Signing you in…' : 'Sign in'}
+            </button>
+          </form>
 
-      <p>{message}</p>
-    </div>
+          <p className="auth-footer-text">
+            Don&apos;t have an account?{' '}
+            <Link href="/signup" className="auth-link">
+              Create one
+            </Link>
+          </p>
+        </div>
+      </section>
+    </main>
   )
 }
