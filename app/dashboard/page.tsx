@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import LogoutButton from '../components/logout-button'
@@ -16,7 +17,9 @@ export default async function DashboardPage() {
   return (
     <main className="page dashboard-page">
       <header className="header dashboard-header">
-        <div className="logo">PMPilot</div>
+        <Link href="/" className="logo">
+          PMPilot
+        </Link>
 
         <div className="dashboard-header-right">
           <div className="dashboard-user">

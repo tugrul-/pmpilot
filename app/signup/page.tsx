@@ -38,7 +38,9 @@ export default function SignupPage() {
   return (
     <main className="page auth-page">
       <header className="header auth-header">
-        <div className="logo">PMPilot</div>
+        <Link href="/" className="logo">
+          PMPilot
+        </Link>
       </header>
 
       <section className="auth-section">
