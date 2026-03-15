@@ -8,7 +8,7 @@ export default function Home() {
           <a href="#features">Features</a>
           <a href="#how-it-works">How it Works</a>
           <a href="#pricing">Pricing</a>
-          <a href="#login">Login</a>
+          <a href="/login">Login</a>
         </nav>
 
         <a href="#get-started" className="btn btn-primary">
