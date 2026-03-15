@@ -14,16 +14,73 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div style={{ padding: 40 }}>
-      <h1>Dashboard</h1>
-      <p>PMPilot kullanıcı paneli</p>
+    <main className="page dashboard-page">
+      <header className="header dashboard-header">
+        <div className="logo">PMPilot</div>
 
-	<LogoutButton />
+        <div className="dashboard-header-right">
+          <div className="dashboard-user">
+            <span className="dashboard-user-label">Signed in as</span>
+            <span className="dashboard-user-email">{user.email}</span>
+          </div>
+          <LogoutButton />
+        </div>
+      </header>
 
-      <hr style={{ margin: '24px 0' }} />
+      <section className="dashboard-hero">
+        <div>
+          <p className="eyebrow">Workspace overview</p>
+          <h1 className="dashboard-title">Keep your projects on track</h1>
+          <p className="dashboard-subtitle">
+            This is your starting point for organizing projects, tracking
+            delivery, and keeping everyone aligned. We&apos;ll grow this
+            workspace together.
+          </p>
+        </div>
+      </section>
 
-      <p><strong>User ID:</strong> {user.id}</p>
-      <p><strong>Email:</strong> {user.email}</p>
-    </div>
+      <section className="dashboard-grid">
+        <article className="dashboard-card dashboard-card-primary">
+          <h2>Next steps</h2>
+          <p>
+            Soon you&apos;ll see your active projects and key milestones here.
+            For now, you can use this space to explore the app and verify your
+            account setup.
+          </p>
+
+          <ul className="dashboard-list">
+            <li>Confirm you can sign in and sign out</li>
+            <li>Verify your email via the signup link</li>
+            <li>Invite teammates when we add collaboration features</li>
+          </ul>
+        </article>
+
+        <article className="dashboard-card">
+          <h3>Account details</h3>
+          <dl className="dashboard-meta">
+            <div className="dashboard-meta-row">
+              <dt>User ID</dt>
+              <dd>{user.id}</dd>
+            </div>
+            <div className="dashboard-meta-row">
+              <dt>Email</dt>
+              <dd>{user.email}</dd>
+            </div>
+          </dl>
+        </article>
+
+        <article className="dashboard-card">
+          <h3>Coming soon</h3>
+          <p className="dashboard-coming">
+            We&apos;ll extend this dashboard with:
+          </p>
+          <ul className="dashboard-list">
+            <li>Project portfolio overview</li>
+            <li>Key milestones and risks</li>
+            <li>Delivery and capacity insights</li>
+          </ul>
+        </article>
+      </section>
+    </main>
   )
 }

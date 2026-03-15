@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { createClient } from '../../lib/supabase/client'
+import Link from 'next/link'
+import { createClient } from '@/lib/supabase/client'
 
 export default function SignupPage() {
   const supabase = createClient()
@@ -9,51 +10,92 @@ export default function SignupPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  const handleSignup = async () => {
-	const { error } = await supabase.auth.signUp({
-  	  email,
-  	  password,
-  	  options: {
-    		emailRedirectTo: `${window.location.origin}/auth/callback`,
-  		},
-	})
+  const handleSignup = async (event: React.FormEvent) => {
+    event.preventDefault()
+    setLoading(true)
+    setMessage('')
+
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
+      },
+    })
+
     if (error) {
       setMessage(error.message)
-    } else {
-      setMessage('Signup successful. Check your email.')
+      setLoading(false)
+      return
     }
+
+    setMessage('Signup successful. Check your email.')
+    setLoading(false)
   }
 
   return (
-    <div style={{ padding: 40 }}>
-      <h1>Signup</h1>
+    <main className="page auth-page">
+      <header className="header auth-header">
+        <div className="logo">PMPilot</div>
+      </header>
 
-      <input
-        type="email"
-        placeholder="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+      <section className="auth-section">
+        <div className="auth-card">
+          <p className="eyebrow">Create your account</p>
+          <h1 className="auth-title">Get started with PMPilot</h1>
+          <p className="auth-subtitle">
+            Set up your workspace in a few seconds and start keeping your
+            projects visible and under control.
+          </p>
 
-      <br />
-      <br />
+          <form className="auth-form" onSubmit={handleSignup}>
+            <label className="auth-label">
+              <span>Email</span>
+              <input
+                className="auth-input"
+                type="email"
+                autoComplete="email"
+                placeholder="you@company.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </label>
 
-      <input
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+            <label className="auth-label">
+              <span>Password</span>
+              <input
+                className="auth-input"
+                type="password"
+                autoComplete="new-password"
+                placeholder="Create a password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </label>
 
-      <br />
-      <br />
+            {message && <p className="auth-message">{message}</p>}
 
-      <button onClick={handleSignup}>
-        Sign Up
-      </button>
+            <button
+              className="btn btn-primary auth-submit"
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? 'Creating your account…' : 'Create account'}
+            </button>
+          </form>
 
-      <p>{message}</p>
-    </div>
+          <p className="auth-footer-text">
+            Already have an account?{' '}
+            <Link href="/login" className="auth-link">
+              Sign in
+            </Link>
+          </p>
+        </div>
+      </section>
+    </main>
   )
 }
