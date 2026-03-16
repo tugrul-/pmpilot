@@ -614,6 +614,12 @@ a {
   border-color: #111827;
 }
 
+.dashboard-page .btn-primary:hover {
+  background: #020617;
+  border-color: #020617;
+  color: #ffffff;
+}
+
 .dashboard-form {
   margin-top: 18px;
   padding-top: 14px;
