@@ -608,6 +608,60 @@ a {
   background: #f3f4f6;
 }
 
+.dashboard-page .btn-primary {
+  background: #111827;
+  color: #ffffff;
+  border-color: #111827;
+}
+
+.dashboard-form {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dashboard-form-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dashboard-input,
+.dashboard-select {
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  padding: 8px 10px;
+  font-size: 13px;
+  outline: none;
+  background: #f9fafb;
+  min-width: 0;
+}
+
+.dashboard-input {
+  flex: 1 1 180px;
+}
+
+.dashboard-select {
+  flex: 0 0 140px;
+}
+
+.dashboard-input:focus,
+.dashboard-select:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.15),
+    0 0 0 3px rgba(79, 70, 229, 0.08);
+  background: #ffffff;
+}
+
+.dashboard-form-submit {
+  align-self: flex-start;
+  padding-inline: 16px;
+  font-size: 13px;
+}
+
 @media (max-width: 960px) {
   .dashboard-grid {
     grid-template-columns: minmax(0, 1fr);

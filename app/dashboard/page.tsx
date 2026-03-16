@@ -1,7 +1,41 @@
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
+import { getProjectsForCurrentUser } from '@/lib/projects/queries'
 import LogoutButton from '../components/logout-button'
+
+async function createProject(formData: FormData) {
+  'use server'
+
+  const name = String(formData.get('name') || '').trim()
+  const status = (formData.get('status') as string) || 'planned'
+
+  if (!name) {
+    return
+  }
+
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    redirect('/login')
+  }
+
+  const { error } = await supabase.from('projects').insert({
+    owner_id: user.id,
+    name,
+    status,
+  })
+
+  if (error) {
+    console.error('Error creating project', error)
+  }
+
+  revalidatePath('/dashboard')
+}
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -13,6 +47,8 @@ export default async function DashboardPage() {
   if (!user) {
     redirect('/login')
   }
+
+  const projects = await getProjectsForCurrentUser(supabase)
 
   return (
     <main className="page dashboard-page">
@@ -56,6 +92,32 @@ export default async function DashboardPage() {
             <li>Verify your email via the signup link</li>
             <li>Invite teammates when we add collaboration features</li>
           </ul>
+
+          <form className="dashboard-form" action={createProject}>
+            <div className="dashboard-form-row">
+              <input
+                className="dashboard-input"
+                type="text"
+                name="name"
+                placeholder="New project name"
+                required
+              />
+
+              <select
+                className="dashboard-select"
+                name="status"
+                defaultValue="planned"
+              >
+                <option value="planned">Planned</option>
+                <option value="in_progress">In progress</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
+
+            <button className="btn btn-primary dashboard-form-submit" type="submit">
+              Add project
+            </button>
+          </form>
         </article>
 
         <article className="dashboard-card">
@@ -73,15 +135,25 @@ export default async function DashboardPage() {
         </article>
 
         <article className="dashboard-card">
-          <h3>Coming soon</h3>
-          <p className="dashboard-coming">
-            We&apos;ll extend this dashboard with:
-          </p>
-          <ul className="dashboard-list">
-            <li>Project portfolio overview</li>
-            <li>Key milestones and risks</li>
-            <li>Delivery and capacity insights</li>
-          </ul>
+          <h3>My projects</h3>
+
+          {projects.length === 0 ? (
+            <p className="dashboard-coming">
+              You don&apos;t have any projects yet. We&apos;ll add creation and
+              management tools here next.
+            </p>
+          ) : (
+            <ul className="dashboard-list">
+              {projects.map((project) => (
+                <li key={project.id}>
+                  <strong>{project.name}</strong>{' '}
+                  <span style={{ color: '#6b7280', fontSize: 12 }}>
+                    ({project.status})
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
         </article>
       </section>
     </main>
