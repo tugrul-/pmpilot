@@ -3,7 +3,18 @@ import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
 import { getProjectsForCurrentUser } from '@/lib/projects/queries'
+import { ensureProfileForUser } from '@/lib/profiles/queries'
 import LogoutButton from '../components/logout-button'
+
+function getStatusLabel(status: string) {
+  if (status === 'in_progress') {
+    return 'In progress'
+  }
+  if (status === 'done') {
+    return 'Done'
+  }
+  return 'Planned'
+}
 
 async function createProject(formData: FormData) {
   'use server'
@@ -24,6 +35,18 @@ async function createProject(formData: FormData) {
     redirect('/login')
   }
 
+  const profile = await ensureProfileForUser(supabase, user.id)
+  const projectLimit = profile?.project_limit ?? 3
+
+  const { count: projectCount } = await supabase
+    .from('projects')
+    .select('*', { count: 'exact', head: true })
+    .eq('owner_id', user.id)
+
+  if ((projectCount ?? 0) >= projectLimit) {
+    redirect('/dashboard?error=project_limit')
+  }
+
   const { error } = await supabase.from('projects').insert({
     owner_id: user.id,
     name,
@@ -37,7 +60,13 @@ async function createProject(formData: FormData) {
   revalidatePath('/dashboard')
 }
 
-export default async function DashboardPage() {
+type DashboardPageProps = {
+  searchParams?: Promise<{
+    error?: string
+  }>
+}
+
+export default async function DashboardPage({ searchParams }: DashboardPageProps) {
   const supabase = await createClient()
 
   const {
@@ -48,7 +77,13 @@ export default async function DashboardPage() {
     redirect('/login')
   }
 
+  const profile = await ensureProfileForUser(supabase, user.id)
   const projects = await getProjectsForCurrentUser(supabase)
+  const projectLimit = profile?.project_limit ?? 3
+  const projectCount = projects.length
+  const isLimitReached = projectCount >= projectLimit
+  const resolvedSearchParams = (await searchParams) ?? {}
+  const isLimitError = resolvedSearchParams.error === 'project_limit'
 
   return (
     <main className="page dashboard-page">
@@ -75,6 +110,24 @@ export default async function DashboardPage() {
             delivery, and keeping everyone aligned. We&apos;ll grow this
             workspace together.
           </p>
+          <div className="dashboard-plan-row">
+            <p className="dashboard-plan">
+              Plan: <strong>{profile?.plan ?? 'free'}</strong> - Projects used:{' '}
+              <strong>
+                {projectCount}/{projectLimit}
+              </strong>
+            </p>
+            {isLimitReached && (
+              <Link href="/billing" className="dashboard-upgrade-link">
+                Upgrade plan
+              </Link>
+            )}
+          </div>
+          {isLimitError && (
+            <p className="dashboard-error">
+              Project limit reached for your current plan.
+            </p>
+          )}
         </div>
       </section>
 
@@ -114,9 +167,18 @@ export default async function DashboardPage() {
               </select>
             </div>
 
-            <button className="btn btn-primary dashboard-form-submit" type="submit">
+            <button
+              className="btn btn-primary dashboard-form-submit"
+              type="submit"
+              disabled={isLimitReached}
+            >
               Add project
             </button>
+            {isLimitReached && (
+              <p className="dashboard-coming">
+                You reached your project limit. Upgrade flow will be added next.
+              </p>
+            )}
           </form>
         </article>
 
@@ -147,8 +209,8 @@ export default async function DashboardPage() {
               {projects.map((project) => (
                 <li key={project.id}>
                   <strong>{project.name}</strong>{' '}
-                  <span style={{ color: '#6b7280', fontSize: 12 }}>
-                    ({project.status})
+                  <span className={`dashboard-status dashboard-status-${project.status}`}>
+                    {getStatusLabel(project.status)}
                   </span>
                 </li>
               ))}
