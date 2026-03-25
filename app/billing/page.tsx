@@ -25,6 +25,14 @@ const PLANS = [
     description: 'For organizations with larger portfolios and governance.',
     projectLimit: 100,
   },
+  {
+    key: 'custom',
+    name: 'Custom',
+    price: 'Custom pricing',
+    description:
+      'For enterprise teams that need tailored limits, security, and support.',
+    projectLimit: null,
+  },
 ]
 
 export default async function BillingPage() {
@@ -73,12 +81,19 @@ export default async function BillingPage() {
               <p className="billing-price">{plan.price}</p>
               <p className="billing-description">{plan.description}</p>
               <p className="billing-limit">
-                Project limit: <strong>{plan.projectLimit}</strong>
+                Project limit:{' '}
+                <strong>
+                  {plan.projectLimit === null ? 'Custom' : plan.projectLimit}
+                </strong>
               </p>
 
               {isCurrent ? (
                 <button className="btn btn-secondary" type="button" disabled>
                   Current plan
+                </button>
+              ) : plan.key === 'custom' ? (
+                <button className="btn btn-primary" type="button">
+                  Contact sales
                 </button>
               ) : (
                 <button className="btn btn-primary" type="button">
