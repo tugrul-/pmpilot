@@ -208,10 +208,12 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
             <ul className="dashboard-list">
               {projects.map((project) => (
                 <li key={project.id}>
-                  <strong>{project.name}</strong>{' '}
-                  <span className={`dashboard-status dashboard-status-${project.status}`}>
-                    {getStatusLabel(project.status)}
-                  </span>
+                  <Link href={`/dashboard/projects/${project.id}`} className="project-link">
+                    <strong>{project.name}</strong>{' '}
+                    <span className={`dashboard-status dashboard-status-${project.status}`}>
+                      {getStatusLabel(project.status)}
+                    </span>
+                  </Link>
                 </li>
               ))}
             </ul>
