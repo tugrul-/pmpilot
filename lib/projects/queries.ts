@@ -7,6 +7,9 @@ export interface Project {
   owner_id: string
   name: string
   status: ProjectStatus
+  organization: string | null
+  baseline_start: string | null
+  baseline_end: string | null
   created_at: string
   updated_at: string
 }
@@ -19,7 +22,7 @@ export async function getProjectsForCurrentUser(
     error,
   } = await supabase
     .from('projects')
-    .select('id, owner_id, name, status, created_at, updated_at')
+    .select('id, owner_id, name, status, organization, baseline_start, baseline_end, created_at, updated_at')
     .order('created_at', { ascending: false })
 
   if (error) {
@@ -29,4 +32,3 @@ export async function getProjectsForCurrentUser(
 
   return data ?? []
 }
-
