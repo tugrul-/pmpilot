@@ -239,6 +239,18 @@ a {
   box-shadow: 0 14px 30px rgba(17,24,39,0.08);
 }
 
+.card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #f5f3ff;
+  color: #6d28d9;
+  margin-bottom: 16px;
+}
+
 .card h3 {
   margin-top: 0;
   margin-bottom: 12px;
@@ -1192,6 +1204,126 @@ a {
   gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+/* Landing page pricing grid */
+
+.lp-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto 24px;
+}
+
+.lp-pricing-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+  position: relative;
+}
+
+.lp-pricing-card-featured {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.2), 0 16px 40px rgba(79, 70, 229, 0.12);
+}
+
+.lp-pricing-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #4f46e5;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.lp-pricing-card h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.lp-pricing-price {
+  margin: 8px 0 14px;
+  font-size: 36px;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1;
+}
+
+.lp-pricing-price span {
+  font-size: 15px;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+.lp-pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.lp-pricing-features li {
+  font-size: 13px;
+  color: #374151;
+  padding-left: 20px;
+  position: relative;
+}
+
+.lp-pricing-features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #4f46e5;
+  font-weight: 700;
+}
+
+.lp-pricing-btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.lp-pricing-note {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-top: 8px;
+}
+
+.lp-pricing-card-custom {
+  background: #f9fafb;
+}
+
+.lp-pricing-price-custom {
+  font-size: 26px;
+}
+
+@media (max-width: 960px) {
+  .lp-pricing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 560px) {
+  .lp-pricing-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 400px;
+  }
 }
 
 /* Billing */
