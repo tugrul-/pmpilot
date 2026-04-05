@@ -1400,9 +1400,10 @@ a {
 }
 
 .billing-limit {
-  margin: 0 0 8px;
+  margin: 0;
   font-size: 13px;
   color: #374151;
+  flex: 1;
 }
 
 @media (max-width: 960px) {
