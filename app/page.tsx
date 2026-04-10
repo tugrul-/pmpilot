@@ -243,20 +243,40 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="footer">
-        <div className="footer-top">
-          <div className="footer-brand">© 2026 PMPilot. All rights reserved.</div>
-          <div className="footer-links">
-            <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
-            <a href="mailto:hello@pmpilot.org">Contact</a>
-            <a href="/privacy-policy">Privacy Policy</a>
-            <a href="/terms-of-service">Terms of Service</a>
+      <footer className="footer-new">
+        <div className="footer-new-inner">
+          <div className="footer-col footer-col-brand">
+            <div className="logo">PMPilot</div>
+            <p className="footer-tagline">
+              AI destekli proje yönetim platformu. Twino Yazılım Hizmetleri Ltd. Şti. tarafından geliştirilmektedir.
+            </p>
+            <a href="mailto:info@twino.digital" className="footer-email">info@twino.digital</a>
+          </div>
+
+          <div className="footer-col">
+            <h4 className="footer-col-title">Platform</h4>
+            <a href="#features">Özellikler</a>
+            <a href="#pricing">Fiyatlandırma</a>
+            <a href="/login">Giriş Yap</a>
+            <a href="/signup">Kayıt Ol</a>
+          </div>
+
+          <div className="footer-col">
+            <h4 className="footer-col-title">Kurumsal</h4>
+            <a href="/hakkimizda">Hakkımızda</a>
+            <a href="mailto:info@twino.digital">İletişim</a>
+          </div>
+
+          <div className="footer-col">
+            <h4 className="footer-col-title">Yasal</h4>
+            <a href="/gizlilik-politikasi">Gizlilik Politikası</a>
+            <a href="/mesafeli-satis-sozlesmesi">Mesafeli Satış Sözleşmesi</a>
+            <a href="/teslimat-ve-iade">Teslimat ve İptal / İade</a>
           </div>
         </div>
-        <div className="footer-company">PMPilot is developed and operated by Twino Digital.</div>
-        <div className="footer-contact">
-          Contact: <a href="mailto:hello@pmpilot.org">hello@pmpilot.org</a>
+
+        <div className="footer-new-bottom">
+          <span>© 2026 PMPilot · Twino Yazılım Hizmetleri Ltd. Şti. · Tüm hakları saklıdır.</span>
         </div>
       </footer>
     </main>
