@@ -65,7 +65,7 @@ export default function HakkimizdaPage() {
               </tr>
               <tr>
                 <td>Web Sitesi</td>
-                <td><a href="https://pmpilot.org">pmpilot.org</a></td>
+                <td><a href="https://twino.org">twino.org</a></td>
               </tr>
             </tbody>
           </table>
