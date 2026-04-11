@@ -60,10 +60,6 @@ export default function HakkimizdaPage() {
                 <td>0859142915700001</td>
               </tr>
               <tr>
-                <td>Telefon</td>
-                <td>0532 302 32 89</td>
-              </tr>
-              <tr>
                 <td>E-posta</td>
                 <td><a href="mailto:info@twino.digital">info@twino.digital</a></td>
               </tr>
@@ -87,7 +83,6 @@ export default function HakkimizdaPage() {
           </p>
           <ul>
             <li>E-posta: <a href="mailto:info@twino.digital">info@twino.digital</a></li>
-            <li>Telefon: 0532 302 32 89</li>
             <li>Adres: Teknopark Ankara, İvedikOsb Mah. 2224. Cadde No: 1/116, Yenimahalle / Ankara</li>
           </ul>
         </div>

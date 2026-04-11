@@ -112,8 +112,6 @@ export default function TeslimatVeIadePage() {
           </p>
           <ul>
             <li>E-posta: <a href="mailto:info@twino.digital">info@twino.digital</a></li>
-            <li>Telefon: 0532 302 32 89</li>
-            <li>Çalışma saatleri: Pazartesi–Cuma, 09:00–18:00</li>
           </ul>
         </div>
       </section>

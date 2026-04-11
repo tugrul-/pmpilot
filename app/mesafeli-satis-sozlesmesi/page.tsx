@@ -31,7 +31,6 @@ export default function MesafeliSatisSozlesmesiPage() {
               <tr><td>Adres</td><td>Teknopark Ankara, İvedikOsb Mah. 2224. Cadde No: 1/116, Yenimahalle / Ankara</td></tr>
               <tr><td>Vergi Dairesi / No</td><td>İvedik / 9591429157</td></tr>
               <tr><td>MERSİS No</td><td>0859142915700001</td></tr>
-              <tr><td>Telefon</td><td>0532 302 32 89</td></tr>
               <tr><td>E-posta</td><td><a href="mailto:info@twino.digital">info@twino.digital</a></td></tr>
             </tbody>
           </table>

@@ -30,7 +30,6 @@ export default function GizlilikPolitikasiPage() {
               <tr><td>Ünvan</td><td>Twino Yazılım Hizmetleri Ltd. Şti.</td></tr>
               <tr><td>Adres</td><td>Teknopark Ankara, İvedikOsb Mah. 2224. Cadde No: 1/116, Yenimahalle / Ankara</td></tr>
               <tr><td>E-posta</td><td><a href="mailto:info@twino.digital">info@twino.digital</a></td></tr>
-              <tr><td>Telefon</td><td>0532 302 32 89</td></tr>
             </tbody>
           </table>
 
